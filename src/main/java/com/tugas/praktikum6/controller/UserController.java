@@ -34,4 +34,10 @@ public class UserController {
         return "home";
     }
 
+    @GetMapping("/form")
+    public String formPage(Model model) {
+        model.addAttribute("user", new User());
+        return "form";
+    }
+
 }

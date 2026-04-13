@@ -20,7 +20,7 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/Login")
+    @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model) {
         if ("admin".equals(username) && "20230140126".equals(password)) {
             return "redirect:/home";

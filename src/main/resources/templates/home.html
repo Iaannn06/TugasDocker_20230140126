@@ -1,28 +1,95 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head><title>Home</title></head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - My Website</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h2 { margin: 0; color: #007BFF; }
+        .action-buttons button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .action-buttons button.logout {
+            background-color: #dc3545;
+        }
+        .action-buttons button:hover { opacity: 0.9; }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th { background-color: #f8f9fa; color: #555; }
+        .empty-state { text-align: center; color: #777; margin-top: 20px; font-style: italic; }
+    </style>
+</head>
 <body>
-<h2>MY Website 20230140126</h2>
-<p>Selamat datang di aplikasi!</p>
+<div class="header">
+    <div>
+        <h2>MY Website 20230140126</h2>
+        <p>Selamat datang di aplikasi!</p>
+    </div>
+    <div class="action-buttons">
+        <a href="/form"><button>Input Data Mahasiswa</button></a>
+        <a href="/"><button class="logout">Logout</button></a>
+    </div>
+</div>
 
-<a href="/form"><button>Input Data Mahasiswa</button></a>
-<a href="/"><button>Logout</button></a>
-
-<h3>Data Mahasiswa</h3>
-<table border="1">
-    <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>NIM</th>
-        <th>Jenis Kelamin</th>
-    </tr>
-    <tr th:each="user, stat : ${users}">
-        <td th:text="${stat.count}"></td>
-        <td th:text="${user.nama}"></td>
-        <td th:text="${user.nim}"></td>
-        <td th:text="${user.jenisKelamin}"></td>
-    </tr>
-</table>
-<p th:if="${#lists.isEmpty(users)}">Belum ada data</p>
+<div class="content">
+    <h3>Data Mahasiswa</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Jenis Kelamin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user, stat : ${users}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${user.nama}"></td>
+            <td th:text="${user.nim}"></td>
+            <td th:text="${user.jenisKelamin}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="empty-state" th:if="${#lists.isEmpty(users)}">Belum ada data mahasiswa.</p>
+</div>
 </body>
 </html>

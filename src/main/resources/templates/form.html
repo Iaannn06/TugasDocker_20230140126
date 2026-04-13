@@ -1,22 +1,69 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head><title>Form Input Mahasiswa</title></head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Mahasiswa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+        h2 { color: #333; margin-bottom: 20px; border-bottom: 2px solid #007BFF; padding-bottom: 10px;}
+        label { font-weight: bold; color: #555; display: block; margin-top: 15px;}
+        input[type="text"] {
+            width: 100%; padding: 10px; margin-top: 5px;
+            border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+        }
+        .radio-group { margin-top: 10px; }
+        .radio-group input { margin-right: 5px; }
+        .radio-group label { display: inline; font-weight: normal; margin-right: 15px;}
+        .button-group { margin-top: 25px; display: flex; justify-content: space-between; align-items: center;}
+        button {
+            background-color: #007BFF; color: white; padding: 10px 20px;
+            border: none; border-radius: 4px; cursor: pointer; font-size: 15px;
+        }
+        button:hover { background-color: #0056b3; }
+        a.back-link { color: #6c757d; text-decoration: none; font-size: 14px;}
+        a.back-link:hover { text-decoration: underline; color: #343a40;}
+    </style>
+</head>
 <body>
-<h2>Form Input Mahasiswa</h2>
-<form action="/submit" method="post" th:object="${user}">
-    <label>Nama:</label><br>
-    <input type="text" th:field="*{nama}" required><br><br>
+<div class="form-container">
+    <h2>Form Input Mahasiswa</h2>
+    <form action="/submit" method="post" th:object="${user}">
+        <label for="nama">Nama Lengkap:</label>
+        <input type="text" id="nama" th:field="*{nama}" placeholder="Masukkan Nama" required>
 
-    <label>NIM:</label><br>
-    <input type="text" th:field="*{nim}" required><br><br>
+        <label for="nim">NIM:</label>
+        <input type="text" id="nim" th:field="*{nim}" placeholder="Masukkan NIM" required>
 
-    <label>Jenis Kelamin:</label><br>
-    <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki"> Laki-laki<br>
-    <input type="radio" th:field="*{jenisKelamin}" value="Perempuan"> Perempuan<br><br>
+        <label>Jenis Kelamin:</label>
+        <div class="radio-group">
+            <input type="radio" id="laki" th:field="*{jenisKelamin}" value="Laki-laki" required>
+            <label for="laki">Laki-laki</label>
 
-    <button type="submit">Submit</button>
-</form>
-<br>
-<a href="/home">Kembali ke Home</a>
+            <input type="radio" id="perempuan" th:field="*{jenisKelamin}" value="Perempuan" required>
+            <label for="perempuan">Perempuan</label>
+        </div>
+
+        <div class="button-group">
+            <a href="/home" class="back-link">← Kembali</a>
+            <button type="submit">Simpan Data</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
